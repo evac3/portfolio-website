@@ -1,26 +1,219 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FCF6F2;
+  --foreground: #1B2641;
+
+  --secondary: #708DAF;
+  --secondary-foreground: #FFFFFF;
+
+  --link-foreground: #e3c0b6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-link-foreground: var(--link-foreground);
+  
+  --font-serif: var(--font-dm-serif);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FCF6F2;
+    --foreground: #1B2641;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+
+h2 {
+  font-size: 36px;
+  font-family: var(--font-serif);
+}
+
+h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+h6 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  text-transform: capitalize;
+}
+
+/* header and footer positioning */
+header, footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+header {
+  top: 0;
+}
+footer {
+  bottom: 0;
+}
+
+.page-content {
+  position: fixed;
+  top: 68px;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* scrollbar*/
+.page-content::-webkit-scrollbar-track {
+  background: var(--link-foreground);
+}
+.page-content::-webkit-scrollbar-thumb {
+  background: var(--background);
+  border: 2px solid var(--link-foreground);
+}
+.page-content::-webkit-scrollbar-thumb:hover {
+  background: var(--link-foreground);
+}
+.page-content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--link-foreground) var(--background);
+}
+
+/* project card */
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  border: 2px solid var(--secondary);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.project-card-image {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+}
+.project-card-image-inner {
+  object-fit: cover;
+}
+.project-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-left: 2px solid var(--secondary);
+}
+.project-card-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  margin: 0 0 0.25rem 0;
+}
+.project-card-date {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin: 0 0 0.5rem 0;
+}
+.project-card-description {
+  margin: 0;
+}
+.project-card-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-top: 1rem;
+}
+.project-card-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  color: var(--secondary);
+  transition: color 0.2s ease;
+}
+.project-card-icon svg {
+  width: 36px;
+  height: 36px;
+}
+.project-card-icon:hover {
+  color: var(--link-foreground);
+}
+
+/* gallery css */
+.artwork {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.lightbox-overlay {
+  position: fixed;
+  top: 68px;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  cursor: zoom-out;
+}
+.lightbox-content {
+  position: relative;
+  cursor: default;
+}
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* about flip animation */
+.coin-flip {
+  perspective: 1000px;
+  cursor: pointer;
+}
+.coin-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.9s ease-in-out;
+}
+.coin-flip:hover .coin-flip-inner {
+  transform: rotateY(540deg);
+}
+.coin-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+.coin-image-a {
+  transform: rotateY(0deg);
+}
+.coin-image-b {
+  transform: rotateY(180deg);
 }
