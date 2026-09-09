@@ -1,4 +1,6 @@
 import Image from "next/image";
+import codingDoodle from "../../public/about/coding_doodle.png";
+import artDoodle from "../../public/about/art_doodle.png";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
 
@@ -43,13 +45,23 @@ export default function About() {
           </div>
           
           <div className="order-1 md:order-2 p-6 rounded-lg flex items-center justify-center">
-            <div className="coin-flip w-48 h-64">
+            <div className="coin-flip w-72 h-64">
               <div className="coin-flip-inner">
-                <div className="coin-face coin-image-a">
-                  <Image src="/coding_doodle.png" alt="" fill className="object-cover rounded-lg" />
+                <div className="coin-face coin-image-a relative w-full h-full">
+                  <Image 
+                    src={codingDoodle} 
+                    alt="Coding doodle" 
+                    fill 
+                    className="object-cover rounded-lg" 
+                  />
                 </div>
-                <div className="coin-face coin-image-b">
-                  <Image src="/art_doodle.png" alt="" fill className="object-cover rounded-lg" />
+                <div className="coin-face coin-image-b relative w-full h-full">
+                  <Image 
+                    src={artDoodle} 
+                    alt="Art doodle" 
+                    fill 
+                    className="object-cover rounded-lg" 
+                  />
                 </div>
               </div>
             </div>
